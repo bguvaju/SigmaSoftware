@@ -11,9 +11,9 @@ namespace Data.Model
     {
         [Key]
         public string Id { get; set; }
-        public string? Created_By { get; set; }
-        public DateTime? Created_At { get; set; } = DateTime.UtcNow;
-        public string? Updated_By { get; set; }
-        public DateTime? Updated_At { get; set; }
+        public string? created_by { get; set; }
+        public DateTime? created_at { get; set; } = DateTime.UtcNow;
+        public string? updated_by { get; set; }
+        public DateTime? updated_at { get; set; }
     }
 }
