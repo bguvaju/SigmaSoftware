@@ -1,6 +1,7 @@
 ﻿using Application.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Services.CandidateService.Implementation;
+using Services.CandidateService.Interface;
 
 namespace Sigma.Controllers
 {
@@ -9,9 +10,9 @@ namespace Sigma.Controllers
     [Route("api/[controller]")]
     public class CandidateController : BaseController
     {
-        private readonly CandidateService _candidateService;
+        private readonly ICandidateService _candidateService;
 
-        public CandidateController(CandidateService candidateService)
+        public CandidateController(ICandidateService candidateService)
         {
             _candidateService = candidateService;
         }

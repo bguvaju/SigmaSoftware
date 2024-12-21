@@ -24,17 +24,17 @@ namespace Services.CandidateService.Implementation
             try
             {
                 var existingCandidate = await _context.Candidates
-                            .FirstOrDefaultAsync(c => c.Email == candidate.Email);
+                            .FirstOrDefaultAsync(c => c.email == candidate.Email);
                 if (existingCandidate != null)
                 {
-                    existingCandidate.FirstName = candidate.FirstName;
-                    existingCandidate.LastName = candidate.LastName;
-                    existingCandidate.PhoneNumber = candidate.PhoneNumber;
-                    existingCandidate.Email = candidate.Email;
-                    existingCandidate.TimeToCall = candidate.TimeToCall;
-                    existingCandidate.LinkedInProfile = candidate.LinkedInProfile;
-                    existingCandidate.GithubProfile = candidate.GithubProfile;
-                    existingCandidate.Comment = candidate.Comment;
+                    existingCandidate.first_name = candidate.FirstName;
+                    existingCandidate.last_name = candidate.LastName;
+                    existingCandidate.phone_number = candidate.PhoneNumber;
+                    existingCandidate.email = candidate.Email;
+                    existingCandidate.time_to_call = candidate.TimeToCall;
+                    existingCandidate.linkedin_profile = candidate.LinkedInProfile;
+                    existingCandidate.github_profile = candidate.GithubProfile;
+                    existingCandidate.comment = candidate.Comment;
                     _context.Candidates.Update(existingCandidate);
                     successMessage = ResponseConstants.CandidateUpdateSuccess;
                     result = existingCandidate;
@@ -43,14 +43,15 @@ namespace Services.CandidateService.Implementation
                 {
                     var newCandidate = new Candidate
                     {
-                        FirstName = candidate.FirstName,
-                        LastName = candidate.LastName,
-                        PhoneNumber = candidate.PhoneNumber,
-                        Email = candidate.Email,
-                        TimeToCall = candidate.TimeToCall,
-                        LinkedInProfile = candidate.LinkedInProfile,
-                        GithubProfile = candidate.GithubProfile,
-                        Comment = candidate.Comment
+                        Id = Guid.NewGuid().ToString(),
+                        first_name = candidate.FirstName,
+                        last_name = candidate.LastName,
+                        phone_number = candidate.PhoneNumber,
+                        email = candidate.Email,
+                        time_to_call = candidate.TimeToCall,
+                        linkedin_profile = candidate.LinkedInProfile,
+                        github_profile = candidate.GithubProfile,
+                        comment = candidate.Comment
                     };
                     _context.Candidates.Add(newCandidate);
                     successMessage = ResponseConstants.CandidateCreateSuccess;
