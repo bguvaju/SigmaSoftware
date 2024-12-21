@@ -23,7 +23,7 @@ namespace Sigma.Controllers
         => StatusCode(StatusCodes.Status422UnprocessableEntity, new
         {
             Code = 422,
-            Message = ErrorConstant.ValidationError,
+            Message = ResponseConstants.ValidationError,
             Errors = errors ?? new List<string>()
         });
 

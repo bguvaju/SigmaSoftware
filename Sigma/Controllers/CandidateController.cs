@@ -1,12 +1,32 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Application.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Services.CandidateService.Implementation;
 
 namespace Sigma.Controllers
 {
-    public class CandidateController : Controller
+
+    [ApiController]
+    [Route("api/[controller]")]
+    public class CandidateController : BaseController
     {
-        public IActionResult Index()
+        private readonly CandidateService _candidateService;
+
+        public CandidateController(CandidateService candidateService)
         {
-            return View();
+            _candidateService = candidateService;
+        }
+
+        [HttpPost]
+        public async Task<dynamic> CreateOrUpdate([FromBody] UpsertCandidate candidate, CancellationToken cancellationToken)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return ValidationResponse(ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList());
+            }
+
+            var result = await _candidateService.UpsertCandidate(candidate, cancellationToken);
+            return Ok(result);
         }
     }
 }
